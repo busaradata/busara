@@ -9,7 +9,7 @@ table_func2 <- function(tab,col_names  =  col_names){
 }
 
 
-#devtools::install_bitbucket(repo = "stevenndungu/busara", username = "steven.ndungu@busaracenter.org", ref = "master", quiet = FALSE, auth_user = NULL, password = "machetho300#")
+#devtools::install_bitbucket(repo = "stevenndungu/busara", username = "steven.ndungu@busaracenter.org", ref = "master", quiet = FALSE, auth_user = NULL, password = "****)
 
 
-#devtools::install_bitbucket(repo = "stevenndungu/busara", username = "steven.ndungu@busaracenter.org", ref = "master", quiet = FALSE, auth_user = NULL, password = "machetho300#", force = T)
+#devtools::install_bitbucket(repo = "stevenndungu/busara", username = "steven.ndungu@busaracenter.org", ref = "master", quiet = FALSE, auth_user = NULL, password = "****", force = T)
