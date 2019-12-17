@@ -1,15 +1,14 @@
 Package: busara
-Version: 0.0.0
+Type: Package
+Title: Busara Automated Data Analytics 
+Version: 0.1.0
 Date: 2019-09-16
-Title: Package to Automate Summaries, Explorations, Visualizations and other Algorithms at Busara
-Authors@R: c(person(“Steven”, “Data Scientist/Developer", role = c("aut", "cre"),
-                     email = “steven.ndungu@busaracenter.org”))
-
-Author: Steven Ndungu [aut, cre]
-Maintainer: Steven Ndung’u <stevenndungu4@gmail.com>
-Depends: R (>= 3.1.0), kableExtra
-Description: A (one paragraph) description of what
-  the package does and why it may be useful.
+Author: Steven
+Maintainer: Steven Ndung'u <stevenndungu4@gmail.com>
+Description: Coming Soon!
+    Use four spaces when indenting paragraphs within the Description.
 License: GPL (>= 2)
-URL: https://www.r-project.org, http://www.another.url
-BugReports: https://pkgname.bugtracker.url
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.1.0), ggplot2,dplyr,knitr,ggthemes,roxygen2,ggthemes
+    
