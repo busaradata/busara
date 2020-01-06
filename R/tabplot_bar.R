@@ -14,6 +14,7 @@ tab_to_df <- function(tab, sort_values = "normal", add_totals = TRUE, dcm_place 
     Count  =  df[, 1],
     Percent  =  round((df[, 1] / sum(df[, 1])) * 100, dcm_place)
   )
+  library(dplyr) # for the %>% symbols to be loaded
   if (sort_values == "desc") {
     df1  =  df1 %>% dplyr::arrange(desc(Count))
   } else if (sort_values == "asc") {
