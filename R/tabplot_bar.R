@@ -61,52 +61,52 @@ tabplot <-
       full_width  =  F
     )
     res = filter(res, Percent >= filter_perc)
-    plot = ggplot(res, aes_string(
+    plot = ggplot2::ggplot(res, ggplot2::aes_string(
       x = paste0("reorder(", "variable", ",Percent)")  ,
       y = "Percent"
-    )) + geom_bar(stat  =  "identity",
-                  position  =  position_dodge(),
-                  fill = "#0033A1") + geom_text(aes(variable, Percent, label  = paste(Percent)),
+    )) + ggplot2::geom_bar(stat  =  "identity",
+                  position  =  ggplot2::position_dodge(),
+                  fill = "#0033A1") + ggplot2::geom_text(ggplot2::aes(variable, Percent, label  = paste(Percent)),
                                                 hjust  =  0.5,
-                                                vjust = -0.3) + ylab("Percent") + xlab("") + theme_hc() + theme(
-                                                  plot.title  =  element_text(size  =  12, hjust  =  0.5),
-                                                  plot.subtitle  =  element_text(hjust  =  0.5),
-                                                  text  =  element_text(size = 10, family = "Source Sans Pro Semibold"),
-                                                  panel.border  =  element_blank(),
-                                                  axis.text.x  =  element_text(angle  =  0, hjust  =  0.5),
-                                                  panel.grid.major  =  element_blank(),
-                                                  panel.grid.minor  =  element_line(size  =  0.6, colour  = "gray"),
-                                                  axis.line.x  =  element_line(color = "gray", size  =  1),
+                                                vjust = -0.3) + ggplot2::ylab("Percent") + ggplot2::xlab("") + ggthemes::theme_hc() + ggplot2::theme(
+                                                  plot.title  =  ggplot2::element_text(size  =  12, hjust  =  0.5),
+                                                  plot.subtitle  =  ggplot2::element_text(hjust  =  0.5),
+                                                  text  =  ggplot2::element_text(size = 10, family = "Source Sans Pro Semibold"),
+                                                  panel.border  =  ggplot2::element_blank(),
+                                                  axis.text.x  =  ggplot2::element_text(angle  =  0, hjust  =  0.5),
+                                                  panel.grid.major  =  ggplot2::element_blank(),
+                                                  panel.grid.minor  =  ggplot2::element_line(size  =  0.6, colour  = "gray"),
+                                                  axis.line.x  =  ggplot2::element_line(color = "gray", size  =  1),
                                                   legend.position = "right",
-                                                  legend.title  =  element_blank()
+                                                  legend.title  =  ggplot2::element_blank()
                                                 )  +
-      ggtitle(title1) +
-      xlab(xlabell)
+      ggplot2::ggtitle(title1) +
+      ggplot2::xlab(xlabell)
 
     if (flip) {
-      plot = ggplot(res, aes_string(
+      plot = ggplot2::ggplot(res, aes_string(
         x = paste0("reorder(", "variable", ",Percent)")  ,
         y = "Percent"
-      )) + geom_bar(stat  =  "identity",
-                    position  =  position_dodge(),
-                    fill = "#0033A1") + geom_text(aes(variable, Percent, label  = paste(Percent)),
+      )) + ggplot2::geom_bar(stat  =  "identity",
+                    position  =  ggplot2::position_dodge(),
+                    fill = "#0033A1") + ggplot2::geom_text(ggplot2::aes(variable, Percent, label  = paste(Percent)),
                                                   hjust  =  -0.5,
-                                                  vjust = -0.4) + ylab("Percent") + xlab("") + theme_hc() + theme(
-                                                    plot.title  =  element_text(size  =  12, hjust  =  0.5),
-                                                    plot.subtitle  =  element_text(hjust  =  0.5),
-                                                    text  =  element_text(size = 10, family = "Source Sans Pro Semibold"),
-                                                    panel.border  =  element_blank(),
-                                                    axis.text.x  =  element_text(angle  =  0, hjust  =  0.5),
-                                                    panel.grid.major  =  element_blank(),
-                                                    panel.grid.minor  =  element_line(size  =  0.6, colour  = "gray"),
-                                                    axis.line.x  =  element_line(color = "gray", size  =  1),
+                                                  vjust = -0.4) + ggplot2::ylab("Percent") + ggplot2::xlab("") + ggthemes::theme_hc() + ggplot2::theme(
+                                                    plot.title  =  ggplot2::element_text(size  =  12, hjust  =  0.5),
+                                                    plot.subtitle  =  ggplot2::element_text(hjust  =  0.5),
+                                                    text  =  ggplot2::element_text(size = 10, family = "Source Sans Pro Semibold"),
+                                                    panel.border  =  ggplot2::element_blank(),
+                                                    axis.text.x  =  ggplot2::element_text(angle  =  0, hjust  =  0.5),
+                                                    panel.grid.major  =  ggplot2::element_blank(),
+                                                    panel.grid.minor  =  ggplot2::element_line(size  =  0.6, colour  = "gray"),
+                                                    axis.line.x  =  ggplot2::element_line(color = "gray", size  =  1),
                                                     legend.position = "right",
-                                                    legend.title  =  element_blank()
+                                                    legend.title  =  ggplot2::element_blank()
                                                   )  +
-        ggtitle(title1) +
-        coord_flip() +
-        ylim(c(0, max(res$Percent) + 6)) +
-        xlab(xlabell)
+        ggplot2::ggtitle(title1) +
+        ggplot2::coord_flip() +
+        ggplot2::ylim(c(0, max(res$Percent) + 6)) +
+        ggplot2::xlab(xlabell)
     }
     return(list(tabb, plot))
   }
@@ -124,7 +124,7 @@ summary_hist <- function(data1, column, title = "") {
     fill  =  "#0033A1",
   ) + geom_density(col = "#0033A1") + theme_hc() + xlab("") + ylab("Frequency") + ggtitle(title)
 
-  p3 = boxplot_func(data = data1 ,
+  p3 = busara::boxplot_func(data = data1 ,
                     var1 = column,
                     title = title)
 
@@ -139,19 +139,31 @@ barplot_flip_filter_func <- function(data1,var1,var2, xlablabel  =  " ",title  =
   data1 <- transform(data1,
                      var1  =  reorder(var1, var2))
 
-  plot <- ggplot(data1, aes(x  =  var1,y  =  var2,fill  =  "black")) + geom_bar(stat  =  "identity", position  =  position_dodge(),fill = "#0071BC") + geom_text(aes(var1, var2, label  = paste( var2,"%",sep = "")),
-                                                                                                                                                                 hjust  =  -0.5,vjust =  -0.1) + ylab("Percent") + xlab(xlablabel) + theme_hc() + theme(plot.title  =  element_text(size  =  sizee, hjust  =  0.5),
-                                                                                                                                                                                                                                                        plot.subtitle  =  element_text(hjust  =  0.5),
-                                                                                                                                                                                                                                                        text  =  element_text(size = 12, family = "Source Sans Pro Semibold"),
-                                                                                                                                                                                                                                                        panel.border  =  element_blank(),
-                                                                                                                                                                                                                                                        axis.text.y  =  element_text(angle  =  angle, hjust  =  0.5),
-                                                                                                                                                                                                                                                        panel.grid.major  =  element_blank(),
-                                                                                                                                                                                                                                                        panel.grid.minor  =  element_line(size  =  0.6,colour  = "gray"),
-                                                                                                                                                                                                                                                        axis.line.y  =  element_line(color = "gray", size  =  1),
-                                                                                                                                                                                                                                                        legend.position = "right",legend.title  =  element_blank()) +
-    ggtitle(title) +
-    coord_flip() +
-    ylim(ylimm)
+  plot <-
+    ggplot2::ggplot(data1, ggplot2::aes(x  =  var1, y  =  var2, fill  =  "black")) + ggplot2::geom_bar(
+      stat  =  "identity",
+      position  =  ggplot2::position_dodge(),
+      fill = "#0071BC"
+    ) +
+    ggplot2::geom_text(aes(var1, var2, label  = paste(var2, "%", sep = "")),
+
+                       hjust  =  -0.5,
+                       vjust =  -0.1) + ggplot2::ylab("Percent") + ggplot2::xlab(xlablabel) +
+    ggthemes::theme_hc() + ggplot2::theme(
+      plot.title  =  ggplot2::element_text(size  =  sizee, hjust  =  0.5),
+      plot.subtitle  =  ggplot2::element_text(hjust  =  0.5),
+      text  =  element_text(size = 12, family = "Source Sans Pro Semibold"),
+      panel.border  =  ggplot2::element_blank(),
+      axis.text.y  =  ggplot2::element_text(angle  =  angle, hjust  =  0.5),
+      panel.grid.major  =  ggplot2::element_blank(),
+      panel.grid.minor  =  ggplot2::element_line(size  =  0.6, colour  = "gray"),
+      axis.line.y  =  ggplot2::element_line(color = "gray", size  =  1),
+      legend.position = "right",
+      legend.title  =  ggplot2::element_blank()
+    ) +
+    ggplot2::ggtitle(title) +
+    ggplot2::coord_flip() +
+    ggplot2::ylim(ylimm)
 
   return(suppressWarnings(print(plot)))
 }
