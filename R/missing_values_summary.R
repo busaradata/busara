@@ -6,8 +6,8 @@ missing_values_summary <- function(df,perc = 0,dcm = 2,col_names = c("Features",
       as_tibble() %>%
       arrange(desc(count_missing)) %>%
       mutate(percent_missing = round(count_missing/nrow(df),dcm)*100,
-             percent_missing = cell_spec(percent_missing, "html", color = ifelse(percent_missing < 10,ifelse(percent_missing < 20, "blue","red")))) %>%
-      dplyr::filter(percent_missing > perc)
+      percent_missing = cell_spec(percent_missing, "html", color = ifelse(percent_missing > 10, "red", "black"))) %>%
+       dplyr::filter(percent_missing > perc)
   } else {
     cat("There is no Missing values in this data frame Enjoy :) No hustle!\n")
   }
