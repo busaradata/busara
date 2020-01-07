@@ -4,7 +4,7 @@
 # Display tables neatly function
 # Same as table_func but this allows you to change the variable names of the table.
 
-table_func2 <- function(tab,col_names  =  col_names){
+decorate_table <- function(tab,col_names  =  col_names){
   kableExtra::kable_styling(knitr::kable(tab,col.names  =  col_names),bootstrap_options  =  "striped", full_width  =  F)
 }
 

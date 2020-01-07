@@ -112,26 +112,7 @@ tabplot <-
   }
 
 
-summary_hist <- function(data1, column, title = "") {
-  bw <-
-    2 * IQR(as.numeric(as.matrix(data1[, column])), na.rm = T) / length(as.numeric(as.matrix(data1[, column]))) ^
-    (1 / 3)
 
-  p2 =  ggplot(data  =  data1, aes(x  =  !!rlang::sym(column))) + geom_histogram(
-    aes(y = ..density..),
-    binwidth = bw,
-    colour  =  "#0033A1",
-    fill  =  "#0033A1",
-  ) + geom_density(col = "#0033A1") + theme_hc() + xlab("") + ylab("Frequency") + ggtitle(title)
-
-  p3 = busara::boxplot_func(data = data1 ,
-                    var1 = column,
-                    title = title)
-
-  return(list(p2))
-}
-
-#summary_hist(data1 =diamonds,column = "price")
 
 
 barplot_flip_filter_func <- function(data1,var1,var2, xlablabel  =  " ",title  =  "",angle  =  0, flip  =  FALSE, sizee  =  12,ylimm  =  c(0,100)){
@@ -170,69 +151,6 @@ barplot_flip_filter_func <- function(data1,var1,var2, xlablabel  =  " ",title  =
 
 
 
-# Barplot of percentages with three variables....two factor and one numeric variable
 
-barplot_fact_percent <- function(data1,var1, var2,var3, title, xlablabel  =  "",ylablabel  =  "Percent",scale_values  =  c("My spouse"  =  "#66AAD7", "My spouse & I"  =  "#0071BC","Myself"  =  "#00558D","Refuse to answer"  =  "#CCE3F2"), sizee  =  12,angle1 = 0,sizelabel = 3){
-  ggplot(data1, mapping  =  aes(x  =  data1[,var1], y  =  data1[,var2], fill  =  data1[,var3]))  +
-    geom_bar(stat  =  "identity", position  =  position_dodge(.85),width = 0.75)  +
-    geom_text(aes(label  = round(Percentage)), family = "Source Sans Pro Semibold",vjust  = -0.25, size  =  sizelabel, position  =  position_dodge(0.85)) +
-    scale_fill_manual("legend", values  =  scale_values) +
-    theme_hc() + theme(plot.title  =  element_text(size  =  sizee, hjust  =  0.5),
-                       plot.subtitle  =  element_text(hjust  =  0.5),
-                       text  =  element_text(size = 12, family = "Source Sans Pro Semibold"),
-                       panel.border  =  element_blank(),
-                       axis.text.x  =  element_text(angle  =  angle1, hjust  =  0.5),
-                       panel.grid.major  =  element_blank(),
-                       panel.grid.minor  =  element_line(size  =  0.6,colour  = "gray"),
-                       axis.line.x  =  element_line(color = "gray", size  =  1),
-                       legend.position = "right",legend.title  =  element_blank()) +
-    ggtitle(title) +
-    ylab(ylablabel) +
-    xlab(xlablabel)
-}
-
-
-barplot_fact_count <- function(data1,var1, var2,var3, title, xlablabel  =  "",ylablabel  =  "Percent",scale_values  =  c("My spouse"  =  "#66AAD7", "My spouse & I"  =  "#0071BC","Myself"  =  "#00558D","Refuse to answer"  =  "#CCE3F2"), sizee  =  12,angle1 = 0,sizelabel = 3){
-  ggplot(data1, mapping  =  aes(x  =  data1[,var1], y  =  data1[,var2], fill  =  data1[,var3]))  +
-    geom_bar(stat  =  "identity", position  =  position_dodge(.85),width = 0.75)  +
-    geom_text(aes(label  = Total_count), family = "Source Sans Pro Semibold",vjust  = -0.25, size  =  sizelabel, position  =  position_dodge(0.85)) +
-    scale_fill_manual("legend", values  =  scale_values) +
-    theme_hc() + theme(plot.title  =  element_text(size  =  sizee, hjust  =  0.5),
-                       plot.subtitle  =  element_text(hjust  =  0.5),
-                       text  =  element_text(size = 12, family = "Source Sans Pro Semibold"),
-                       panel.border  =  element_blank(),
-                       axis.text.x  =  element_text(angle  =  angle1, hjust  =  0.5),
-                       panel.grid.major  =  element_blank(),
-                       panel.grid.minor  =  element_line(size  =  0.6,colour  = "gray"),
-                       axis.line.x  =  element_line(color = "gray", size  =  1),
-                       legend.position = "right",legend.title  =  element_blank()) +
-    ggtitle(title) +
-    ylab(ylablabel) +
-    xlab(xlablabel)
-}
-
-
-missing_values_summary <- function(df,view = FALSE, perc = 0,dcm = 2,col_names = c("Features","Count Missing (N)","Percentage Missing (%)", "Comment")){
-  missing_count <- sapply(df, function(x) sum(is.na(x)))
-  if (any(missing_count > 0)){
-    miss_df <- data.frame(Features = names(missing_count), count_missing = missing_count)%>%
-      as_tibble() %>%
-      arrange(desc(count_missing)) %>%
-      mutate(percent_missing = round(count_missing/nrow(df),dcm)*100,
-             Comment = ifelse(percent_missing < 5,"Acceptable",ifelse(percent_missing < 15,"High","Very High!"))) %>%
-      dplyr::filter(percent_missing > perc)
-
-    knitr::kable(miss_df,col.names = col_names) %>%
-      kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
-    cat("A copy of this has been saved in your working directory as miss_df.csv. Check out :) !")
-    write.csv(miss_df,"miss_df.csv")
-    if (view){
-      View(miss_df)
-    }
-  }else{
-    cat("There is no Missing values in this data frame Enjoy :) No hustle!\n")
-  }
-
-}
 
 
