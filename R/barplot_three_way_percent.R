@@ -20,7 +20,7 @@ threeway_barplot_percent <- function(df,x_variable, y_variable,groupby_variable,
 }
 
 
-threeway_barplot_percent(df  =  res ,x_variable  =  g1a4, y_variable  =  Percentage, groupby_variable  =  g1a6, title  =  "Number of respondents from  Kebelle by Gender", xlablabel  =  "",ylablabel  =  "Percent",scale_values  =  c( "Male"  =  "#0071BC","Female"  =  "#CCE3F2" ), angle = 90)
+#threeway_barplot_percent(df  =  res ,x_variable  =  g1a4, y_variable  =  Percentage, groupby_variable  =  g1a6, title  =  "Number of respondents from  Kebelle by Gender", xlablabel  =  "",ylablabel  =  "Percent",scale_values  =  c( "Male"  =  "#0071BC","Female"  =  "#CCE3F2" ), angle = 90)
 
 
 
