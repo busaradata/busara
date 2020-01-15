@@ -1,4 +1,4 @@
-#'
+#' A function to display level of missingness in a data frame provided
 #' @param df A data frame to be examined the missingness level
 #' @param perc Percentage of missing values to display
 #' @param dcm Number of decimal places to be previewed

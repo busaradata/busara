@@ -1,12 +1,6 @@
-###################################################################################################
-######################### read and load libraries #################################################
-###################################################################################################
+#' A function  that loads installed  packages and loads and installs those not installed.
 
-# A list of both installed and unistalled packages are provided.
-# The function loads the already installed packages for use
-# Detects the un-installed/missing packages and installs them
-
-#' @param x A vector of all the packages you want to install
+#' @param x A vector of all the packages you want to install or load
 
 
 #'
