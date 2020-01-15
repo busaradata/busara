@@ -20,6 +20,9 @@ missing_values_summary(
 
 \item{col_names}{Title names of the columns on the output}
 }
+\value{
+A data frame structure showing the level of missingness
+}
 \description{
 A function to display level of missingness in a data frame provided
 }

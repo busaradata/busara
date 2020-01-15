@@ -3,9 +3,7 @@
 #' @param perc Percentage of missing values to display
 #' @param dcm Number of decimal places to be previewed
 #' @param col_names Title names of the columns on the output
-
-
-
+#' @return A data frame structure showing the level of missingness
 #'
 #' @examples
 #' missing_values_summary(mtcars)
@@ -22,6 +20,7 @@ missing_values_summary <- function(df,perc = 0,dcm = 2,col_names = c("Features",
       mutate(percent_missing = round(count_missing/nrow(df),dcm)*100,
       percent_missing = cell_spec(percent_missing, "html", color = ifelse(percent_missing > 10, "red", "black"))) %>%
        dplyr::filter(percent_missing > perc)
+    return(miss_df)
   } else {
     cat("There is no Missing values in this data frame Enjoy :) No hustle!\n")
   }
