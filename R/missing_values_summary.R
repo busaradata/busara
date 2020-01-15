@@ -1,3 +1,17 @@
+#'
+#' @param df A data frame to be examined the missingness level
+#' @param perc Percentage of missing values to display
+#' @param dcm Number of decimal places to be previewed
+#' @param col_names Title names of the columns on the output
+
+
+
+#'
+#' @examples
+#' missing_values_summary(mtcars)
+#'
+#' @export
+
 
 missing_values_summary <- function(df,perc = 0,dcm = 2,col_names = c("Features","Count Missing (N)","Percentage Missing (%)")){
   missing_count <- sapply(df, function(x) sum(is.na(x)))

@@ -21,3 +21,7 @@ A data frame structure of the table provided
 \description{
 A Function that converts a table to data.frame.
 }
+\examples{
+tab_to_df(table(CO2$Type))
+
+}

@@ -5,6 +5,10 @@
 #' @param add_totals Adds additional row of Totals. Default : TRUE
 #' @param dcm_place Decides the number of decimal places. Default: 0
 #' @return A data frame structure of the table provided
+#'
+#' @examples
+#' tab_to_df(table(CO2$Type))
+#'
 #' @export
 
 tab_to_df <- function(tab, sort_values = "normal", add_totals = TRUE, dcm_place = 0) {
@@ -148,7 +152,6 @@ barplot_flip_filter_func <- function(data1,var1,var2, xlablabel  =  " ",title  =
 
   return(suppressWarnings(print(plot)))
 }
-
 
 
 
