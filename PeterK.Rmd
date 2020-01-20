@@ -1,0 +1,125 @@
+---
+title: "Lasso"
+author: "Kariuki / Steven"
+date: "06/09/2019"
+output: 
+  html_document:
+    toc: true # table of content true
+    toc_depth: 3  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: true  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+    highlight: tango  # specifies the syntax highlighting style
+  
+---
+
+
+
+```{r setup, include=FALSE}
+#base_dir <- "/Users/stevenndungu/Box/Barclays_Element_Blue/"
+
+#knitr::opts_knit$set(root.dir =base_dir)
+knitr::opts_chunk$set(echo = F,message=F,error = F,warning = F)
+
+pkgs <- c("dplyr","stringr","lubridate","readxl","ggplot2","ggthemes","tidyr","kableExtra")
+
+#installing missing packages 
+
+miss_pkgs <- pkgs[!pkgs %in% installed.packages()[,1]]
+
+if(length(miss_pkgs>0)){
+  install.packages(miss_pkgs,dependencies = T)
+}
+
+#load the packages
+
+invisible(lapply(pkgs,library,character.only=T))
+
+#clear working space
+
+rm(list=ls())
+
+dat = read.csv("/Users/stevenndungu/Downloads/MergedSurveyandAdmin.csv")
+```
+
+
+### Inferential statistics
+
+
+
+```{r,fig.width=10,results='asis',comment=NA}
+
+## lasso regression
+
+## select the focal independent variable and convert it to numeric
+
+#print(summarytools::dfSummary(dat, style = 'grid', plain.ascii = FALSE, graph.magnif = 0.85), method = 'browser')
+
+
+dcm = 2;
+dat =  dat %>% dplyr::filter(!is.na(continuation_rate_calculated))
+
+missing_count <- sapply(dat, function(x) sum(is.na(x)))
+miss_df <- data.frame(Features = names(missing_count), count_missing = missing_count)%>%
+      as_tibble() %>%
+      arrange(desc(count_missing)) %>%
+      mutate(percent_missing = round(count_missing/nrow(dat),dcm)*100) %>%
+      #percent_missing = cell_spec(percent_missing, "html", color = ifelse(percent_missing > 10, "red", "black"))) %>%
+       dplyr::filter(percent_missing < 3 )
+
+
+## list the remaining covariates to under go double lasso
+covariates = as.character(miss_df$Features)
+
+y_var<- as.numeric(dat$continuation_rate_calculated)
+
+## Convert the yvar to matrices
+y_mat = as.matrix(y_var)
+
+## Creating a Model Matrix for purposes of running Lasso models
+pred =paste(covariates, collapse="+")  
+pred1=as.formula(paste("~",pred,sep="")) 
+
+covariates=model.matrix(pred1,dat) 
+
+#use 10 fold cross validation to select the best lambda
+cv <- glmnet::cv.glmnet(covariates, y_var[1:556], alpha = 1,nfolds=4)
+bestlam <- cv$lambda.min
+
+#lasso using the best lambda
+fit_y = glmnet::glmnet(covariates, y_mat[1:556,],alpha = 1,lambda=bestlam)
+
+## Extract the variables selected by the Lasso model
+
+coefficients <- as.data.frame(as.matrix(coef(fit_y)))
+#coefficients<-predict(fit_y,s=bestlam,type="coefficients")
+#coefficients <- as.data.frame(as.matrix(coefficients))
+colnames(coefficients)[1]<- "Coefficients"
+coefficients$Variables = row.names(coefficients)
+
+coefficients <- coefficients %>%
+  filter(abs(Coefficients)>0) %>%
+  filter(Variables!="X.Intercept." & Variables!="Y.Intercept.")
+
+x_vars <- coefficients[,"Variables"]
+
+covariates=as.data.frame(covariates)
+
+to_analyse <- as.data.frame(cbind(dat$continuation_rate_calculated[1:556],covariates[,names(covariates) %in% x_vars]))
+
+names(to_analyse)[1] = "continuation_rate_calculated"
+
+#Fit a linear regression of the dependent variable  and the covariates (Wik) selected by lasso
+
+pred =paste(names(to_analyse), collapse="+")  
+
+model1= lm(paste0("to_analyse$continuation_rate_calculated~",pred,sep=""),data=to_analyse)
+
+tb <- broom::tidy(model1)
+tb[, 2:5] <- round(tb[,2:5], 3)
+tb[,"var_significance"] <- ifelse(tb$p.value<0.05,"Significant","Not significant")
+
+print(kable_styling(kable(tb),bootstrap_options = "striped", full_width = F))
+
+```
+
+
