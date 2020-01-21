@@ -1,4 +1,24 @@
+#' A function  that plots a three way barplot with labels (Percentages) see example
 
+#' @param df A data frame with x variable, y variable and the factor variable.
+#' @param x_variable the variable that will form the x-axis
+#' @param y_variable the variable that will form the y-axis
+#' @param groupby_variable the factor variable that holds the groupings
+#' @param title the title of the plot
+#' @param xlablabel the x label of the plot
+#'  @param ylablabel the y label of the plot
+#'  @param scale_values Specify the factor groups with the colours you would like them to take eg "MMale"  =  "#66AAD7"
+#'  @param sizee the size of title
+#'  @param angle the of lables
+#'  @param sizelabel the size of labels
+
+
+#'
+#' @examples
+#'
+#'
+#' @export
+#'
 
 threeway_barplot_percent <- function(df,x_variable, y_variable,groupby_variable, title, xlablabel  =  "",ylablabel  =  "Percent",scale_values  =  c(), sizee  =  12,angle = 0,sizelabel = 3){
   ggplot2::ggplot(df, mapping  =  ggplot2::aes(x  =  {{x_variable}}, y  =  {{y_variable}}, fill  =  {{groupby_variable}}))  +
