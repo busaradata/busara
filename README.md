@@ -1,2 +1,2 @@
 # quickr
-quickr -  R package [More later]
+quickr -  R package to manipulate, engineer and vizualize data.
