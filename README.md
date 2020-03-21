@@ -1,2 +1,2 @@
-# busara
-Busara R package [More later]
+# quickr
+quickr -  R package [More later]
