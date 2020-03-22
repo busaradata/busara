@@ -26,7 +26,7 @@
 #'
 
 
-bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorbar = FALSE,xlabel = "", ylabel = "", title = "", flip = FALSE, angle = 0, sizee = 12, sizelabel = 4, dcm = 0, ylimm = c(0,NA)){
+bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorbar = FALSE,xlabel = "", ylabel = "", title = "", flip = FALSE, angle = 0, sizee = 12, sizelabel = 4, dcm = 0, ylimm = c(0,NA),labell = ""){
   if(errorbar){
     if (ordered) {
       if (ascending) {
@@ -137,7 +137,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
         if (flip) {
           p = ggplot2::ggplot(df,ggplot2::aes(x = reorder({{xvar}},{{yvar}}),y = {{yvar}})) +
             ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = "")),position  =  ggplot2::position_dodge(0.85),
+            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = "")),position  =  ggplot2::position_dodge(0.85),
                       hjust  =  -0.5,vjust =  0.5,size  =  sizelabel) +
             ggthemes::theme_hc() +
             ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  sizee, hjust  =  0,vjust = 0),
@@ -154,7 +154,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
         }else{
           p = ggplot2::ggplot(df,ggplot2::aes(x = reorder({{xvar}},{{yvar}}),y = {{yvar}})) +
             ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = "")),position  =  ggplot2::position_dodge(0.85),
+            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = "")),position  =  ggplot2::position_dodge(0.85),
                                hjust  =  0.5,vjust =  -0.5,size  =  sizelabel) +
             ggthemes::theme_hc() +
             ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  12, hjust  =  0.5),
@@ -173,7 +173,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
         if (flip) {
           p = ggplot2::ggplot(df,ggplot2::aes(x = reorder({{xvar}},-{{yvar}}),y = {{yvar}})) +
             ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = ""   )),position  =  ggplot2::position_dodge(0.85),
+            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = ""   )),position  =  ggplot2::position_dodge(0.85),
                                hjust  =  -0.5,vjust =  0.5,size  =  sizelabel) +
             ggthemes::theme_hc() +
             ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  sizee, hjust  =  0,vjust = 0),
@@ -190,7 +190,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
         }else{
           p = ggplot2::ggplot(df,ggplot2::aes(x = reorder({{xvar}},-{{yvar}}),y = {{yvar}})) +
             ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = "")),position  =  ggplot2::position_dodge(0.85),
+            ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = "")),position  =  ggplot2::position_dodge(0.85),
                                hjust  =  0.5,vjust =  -0.5,size  =  sizelabel) +
             ggthemes::theme_hc() +
             ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  12, hjust  =  0.5),
@@ -210,7 +210,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
       if (flip) {
         p = ggplot2::ggplot(df,ggplot2::aes(x = {{xvar}},y = {{yvar}})) +
           ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-          ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = "")),position  =  ggplot2::position_dodge(0.85),
+          ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = "")),position  =  ggplot2::position_dodge(0.85),
                              hjust  =  -0.5,vjust =  0.5,size  =  sizelabel) +
           ggthemes::theme_hc() +
           ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  sizee, hjust  =  0,vjust = 0),
@@ -227,7 +227,7 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
       }else{
         p = ggplot2::ggplot(df,ggplot2::aes(x = {{xvar}},y = {{yvar}})) +
           ggplot2::geom_bar(stat = "identity",position = ggplot2::position_dodge(),fill = "#0033A1") +
-          ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),"%",sep = "")),position  =  ggplot2::position_dodge(0.85),
+          ggplot2::geom_text(ggplot2::aes({{xvar}},{{yvar}}, label  = paste(round({{yvar}},dcm),labell,sep = "")),position  =  ggplot2::position_dodge(0.85),
                              hjust  =  0.5,vjust =  -0.5,size  =  sizelabel) +
           ggthemes::theme_hc() +
           ggplot2::theme(plot.title  =  ggplot2::element_text(size  =  12, hjust  =  0.5),
@@ -254,13 +254,13 @@ bar_graph = function(df, xvar ,yvar, ascending = FALSE, ordered = FALSE, errorba
 # df =  diamonds %>% group_by(cut) %>%
 #   summarise(average=  mean(y))
 #
-# bar_graph(df=diamonds,xvar = cut,yvar = y,errorbar = T,ascending = T, flip = T)
+# bar_graph(df=diamonds,xvar = cut,yvar = y,errorbar = T,ordered = FALSE,ascending = T, flip = T)
 #
-#bar_graph(df=df,xvar = cut,yvar = average,ascending = F,flip = F,ordered = T,dcm = 2,title = "")
+# bar_graph(df=df,xvar = cut,yvar = average,ascending = F,flip = F,ordered = T,dcm = 2,title = "")
 #
 #
 # ggplot(df,aes(x=reorder(cut,-average),y=average)) +
 #   geom_bar(stat = "identity",position = position_dodge())
-#
+
 
 
